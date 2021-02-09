@@ -36,6 +36,7 @@ object CommonDeclarationCheckers : DeclarationCheckers() {
     )
 
     override val classCheckers: Set<FirClassChecker> = setOf(
+        FirOverrideChecker,
         FirThrowableSubclassChecker,
     )
 
@@ -50,7 +51,6 @@ object CommonDeclarationCheckers : DeclarationCheckers() {
         FirLocalEntityNotAllowedChecker,
         FirManyCompanionObjectsChecker,
         FirMethodOfAnyImplementedInInterfaceChecker,
-        FirOverrideChecker,
         FirPrimaryConstructorRequiredForDataClassChecker,
         FirSupertypeInitializedInInterfaceChecker,
         FirSupertypeInitializedWithoutPrimaryConstructor,

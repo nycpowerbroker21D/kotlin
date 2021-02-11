@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.fir.analysis.collectors.components
 
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
+import org.jetbrains.kotlin.fir.analysis.checkers.declaration.DeclarationCheckers
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirDeclarationChecker
 import org.jetbrains.kotlin.fir.analysis.checkersComponent
 import org.jetbrains.kotlin.fir.analysis.collectors.AbstractDiagnosticCollector
@@ -13,9 +14,10 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.fir.declarations.*
 
 class DeclarationCheckersDiagnosticComponent(
-    collector: AbstractDiagnosticCollector
+    collector: AbstractDiagnosticCollector,
+    checkers: DeclarationCheckers? = null,
 ) : AbstractDiagnosticCollectorComponent(collector) {
-    private val checkers = session.checkersComponent.declarationCheckers
+    private val checkers: DeclarationCheckers = checkers ?: session.checkersComponent.declarationCheckers
 
     override fun visitFile(file: FirFile, data: CheckerContext) {
         checkers.fileCheckers.check(file, data, reporter)
